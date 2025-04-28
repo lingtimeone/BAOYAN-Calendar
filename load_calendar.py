@@ -40,12 +40,16 @@ def delete_files_with_extension(extension):
 extension = ".ics"
 delete_files_with_extension(extension)
 
+# # avoid cache
+# timestamp = time.strftime("%Y%m%d%H%M%S", time.localtime())
+# filename = 'calendar' + timestamp + '.ics'
+# with open(filename, 'w', encoding='utf-8') as f:
+#     f.writelines(c.serialize())
 # avoid cache
 timestamp = time.strftime("%Y%m%d%H%M%S", time.localtime())
-filename = 'calendar' + timestamp + '.ics'
+filename = 'calendar' + '.ics'
 with open(filename, 'w', encoding='utf-8') as f:
     f.writelines(c.serialize())
-
 
 
 usr = 'lingtimeone'
