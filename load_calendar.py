@@ -48,7 +48,7 @@ with open(filename, 'w', encoding='utf-8') as f:
 
 
 
-usr = 'asimple1'
+usr = 'lingtimeone'
 repo = 'BAOYAN-Calendar'
 branch = 'main'
 ics_name = filename
