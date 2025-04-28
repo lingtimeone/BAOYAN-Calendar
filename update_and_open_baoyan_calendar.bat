@@ -1,0 +1,59 @@
+@echo off
+REM 这是一个用于更新保研日历并自动打开日历文件的批处理脚本
+
+REM --- 设置你的项目根目录路径 ---
+REM 请将 D:\Users\Win OS\Desktop\保研\Timer\BAOYAN-Calendar 替换为你实际的项目路径
+SET "PROJECT_PATH=D:\Users\Win OS\Desktop\BaoYan\Timer\BAOYAN-Calendar"
+REM ------------------------
+
+REM --- 设置你的 Python 解释器路径 ---
+REM 请将 D:/Install/Python/python/python.exe 替换为你实际的 python.exe 路径
+SET "PYTHON_EXECUTABLE=D:\Install\Python\python\python.exe"  REM <-- 将 / 改为 \
+REM ------------------------------------
+
+REM --- 设置 load_calendar.py 脚本的名称 (通常就在项目根目录) ---
+SET "SCRIPT_NAME=load_calendar.py"
+REM ---------------------------------------------------------------
+
+echo.
+echo 切换到项目目录...
+cd /d "%PROJECT_PATH%"
+IF %ERRORLEVEL% NEQ 0 (
+    echo 错误: 无法切换到项目目录 "%PROJECT_PATH%".
+    pause
+    exit /b 1
+)
+echo 当前目录: %CD%
+echo.
+
+echo 运行日历生成脚本 "%SCRIPT_NAME%"...
+"%PYTHON_EXECUTABLE%" "%SCRIPT_NAME%"
+REM 检查 Python 脚本是否成功运行 (基于退出码 0)
+IF %ERRORLEVEL% NEQ 0 (
+    echo 错误: Python 脚本运行失败.
+    echo 请检查脚本内容和你的 Python 环境是否正确安装了 PyYAML 等依赖.
+    pause
+    exit /b 1
+)
+echo 脚本运行完成.
+echo.
+
+echo 查找并打开新生成的 .ics 日历文件...
+REM 由于脚本会删除旧的并生成新的带时间戳的 .ics 文件，
+REM 通常运行后只会有一个 .ics 文件存在。
+REM 我们查找当前目录下所有的 .ics 文件并尝试打开。
+SET "FOUND_ICS=false"
+FOR %%F IN ("%PROJECT_PATH%\*.ics") DO (
+    echo 找到文件: "%%~F"
+    REM 使用 start 命令以默认程序打开文件
+    start "" "%%~F"
+    SET "FOUND_ICS=true"
+)
+
+IF "%FOUND_ICS%"=="false" (
+    echo 警告: 脚本运行后没有找到任何 .ics 文件.
+    echo 请检查 load_calendar.py 脚本是否成功生成了文件.
+)
+echo.
+echo 流程完成.
+pause
