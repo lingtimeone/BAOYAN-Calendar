@@ -3,6 +3,9 @@ from ics import Calendar, Event
 import time
 import os
 
+import datetime
+import pytz
+
 # with open('calendar.yaml', 'r', encoding='utf-8') as f:
 #     calendar = yaml.safe_load(f)
 
@@ -60,6 +63,16 @@ ics_name = filename
 url = f"https://open-web-calendar.hosted.quelltext.eu/calendar.html?url=https%3A%2F%2Fraw.githubusercontent.com%2F{usr}%2F{repo}%2F{branch}%2F{ics_name}"
 
 last_update = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time() + 8 * 60 * 60))
+print(last_update)
+
+
+
+# 设置时区为东八区
+tz = pytz.timezone('Asia/Shanghai')
+# 获取当前时间并设置时区
+now = datetime.datetime.now(tz)
+# 格式化时间
+last_update = now.strftime("%Y-%m-%d %H:%M:%S")
 print(last_update)
 
 with open('README.md', 'w', encoding='utf-8') as f:
