@@ -51,4 +51,5 @@ REM ---------------------------------
 echo.
 echo Process completed.
 echo https://raw.githubusercontent.com/lingtimeone/BAOYAN-Calendar/main/calendar.ics
+echo BaoYanXiaLingYing.
 pause
