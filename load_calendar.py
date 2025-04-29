@@ -60,6 +60,7 @@ ics_name = filename
 url = f"https://open-web-calendar.hosted.quelltext.eu/calendar.html?url=https%3A%2F%2Fraw.githubusercontent.com%2F{usr}%2F{repo}%2F{branch}%2F{ics_name}"
 
 last_update = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time() + 8 * 60 * 60))
+print(last_update)
 
 with open('README.md', 'w', encoding='utf-8') as f:
     f.write(f"""# 上次更新时间：{last_update}\n[![🕊下次一定](img.png "这是一只鸽子")]({url})
