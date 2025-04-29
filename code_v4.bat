@@ -32,7 +32,7 @@ git commit -m "%COMMIT_MESSAGE%" || (
 )
 
 git push origin main
-print('lto')
+print(lto)
 IF %ERRORLEVEL% NEQ 0 (
     echo Warning: Git push failed. Check Git output or try manual pull/push.
     pause
